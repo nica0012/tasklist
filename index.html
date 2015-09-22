@@ -1,0 +1,51 @@
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Angular.js Task List</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="MyController">
+
+    <header>
+        <h1>Tasks</h1>
+    </header>
+
+    <form>
+        <input type="text" ng-model="enteredTask" placeholder="Enter Task">
+        <!--<br>-->
+        <button ng-click="addTask()" class="myButton">Add</button>
+    </form>
+    <ul>
+        <li ng-repeat="task in tasks">
+            <span class="task">{{task}}</span>
+            <i href="" ng-click="removeTask(task)" class="fa fa-trash-o"></i>
+
+        </li>
+    </ul>
+
+</body>
+
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('MyController', function ($scope) {
+        $scope.tasks = ['Brush Teeth', 'Call Johnny', 'Check Email'];
+
+        $scope.addTask = function () {
+            $scope.tasks.push($scope.enteredTask);
+            $scope.enteredTask = '';
+        };
+
+        $scope.removeTask = function (task) {
+            var i = $scope.tasks.indexOf(task);
+            $scope.tasks.splice(i, 1);
+        };
+    });
+</script>
+
+</html>
